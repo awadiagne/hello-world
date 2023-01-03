@@ -15,7 +15,7 @@ jobs:
     
   print_name:
     docker:
-      - image: ircleci/node:13.8.0
+      - image: circleci/node:13.8.0
     steps:
       - run: "echo $NAME"
 
