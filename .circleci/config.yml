@@ -1,20 +1,23 @@
 version: 2.1
 
-commands:
-  print_pipeline_id:
-    description: A command that prints the Circle CI Workflow ID
-    steps:
-      - run: echo $CIRCLE_WORKFLOW_ID
-
-jobs:  
-  print_pipelineId_with_command:
+jobs:
+  jobToFail:
     docker:
       - image: circleci/node:13.8.0
     steps:
-      - print_pipeline_id
+      - run: return 1
 
+  onFailure:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - run: 
+          name: On failure
+          command: 
+            echo 'Hello Error!'
+          when: on_fail
 
 workflows:
   say-hello-workflow:
     jobs:
-      - print_pipelineId_with_command
+      - jobToFail
