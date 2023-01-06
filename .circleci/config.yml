@@ -1,27 +1,18 @@
 version: 2.1
 
+command:
+  print_pipeline_id:
+    description: A command that prints the Circle CI Workflow ID
+    steps:
+      - run: echo $CIRCLE_WORKFLOW_ID
+
 jobs:  
-  save_hello_world_output:
+  print_pipelineId_with_command:
     docker:
       - image: circleci/node:13.8.0
     steps:
-      - run: 
-          command: |
-            echo "Hello World" > output.txt
-      - persist_to_workspace:
-          root: .
-          paths: 
-            - output.txt
-    
-  print_output_file:
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
-      - attach_workspace:
-          at: .
-      - run:
-          command: |
-            cat output.txt
+      - print_pipeline_id
+
 
 workflows:
   say-hello-workflow:
