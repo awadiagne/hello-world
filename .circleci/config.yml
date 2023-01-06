@@ -9,7 +9,7 @@ jobs:
           command: |
             echo "Hello World" > output.txt
       - persist_to_workspace:
-          root: /tmp
+          root: .
           paths: 
             - output.txt
     
@@ -18,7 +18,7 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - attach_workspace:
-          at: /tmp
+          at: .
       - run:
           command: |
             cat output.txt
