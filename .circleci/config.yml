@@ -7,10 +7,6 @@ jobs:
     steps:
       - run: return 1
 
-  onFailure:
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
       - run: 
           name: On failure
           command: 
